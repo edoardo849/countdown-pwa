@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-countdownpwa-dev-120547-authRole",
+            "UnauthRoleArn": "arn:aws:iam::875776569919:role/amplify-countdownpwa-dev-120547-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::875776569919:role/amplify-countdownpwa-dev-120547-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "amplify-countdownpwa-dev-120547-deployment",
+            "UnauthRoleName": "amplify-countdownpwa-dev-120547-unauthRole",
+            "StackName": "amplify-countdownpwa-dev-120547",
+            "StackId": "arn:aws:cloudformation:eu-west-2:875776569919:stack/amplify-countdownpwa-dev-120547/a921e340-b60a-11ea-a577-064d74357b0e",
+            "AmplifyAppId": "d1udypx2hlrszp"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d1udypx2hlrszp",
+                    "type": "cicd"
+                }
+            }
+        }
+    }
+}
