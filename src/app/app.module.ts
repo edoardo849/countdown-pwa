@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { LoggerModule } from 'ngx-logger';
 import { environment } from '@src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,13 @@ import { CountdownItemComponent } from './countdown-item/countdown-item.componen
 import { EventCreateComponent } from './event-create/event-create.component';
 import { ModalComponent } from './modal/modal.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StorageService } from './storage.service';
+import { FormsModule } from '@angular/forms';
+
+
+export function appInit(storageService: StorageService) {
+  return () => storageService.load();
+}
 
 @NgModule({
   declarations: [
@@ -22,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     HttpClientModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     LoggerModule.forRoot({
@@ -29,7 +37,15 @@ import { HttpClientModule } from '@angular/common/http';
       enableSourceMaps: true,
     }),
   ],
-  providers: [],
+  providers: [
+
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInit,
+      multi: true,
+      deps: [StorageService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
