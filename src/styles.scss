@@ -9,6 +9,7 @@ $fa-font-path: "./assets/fonts/fontawesome";
 // Import only what you need from Bulma
 // https://dev.to/adrianbudzynski/dark-theme-for-your-angular-app-1664
 $radius: 1px;
+
 $blue: #4885ed;
 $orange: #ff9800;
 $yellow: #ffeb3b;
@@ -22,7 +23,6 @@ $red: #f44336;
 @import "../node_modules/bulma/sass/base/_all.sass";
 
 $primary: $blue;
-
 $scheme-main: $black-ter;
 $background: $dark;
 $body-background-color: $dark;
@@ -110,6 +110,11 @@ $cardsColours: (
     &.has-background-#{$cardColour} {
       background-color: $i;
       color: findColorInvert($i);
+
+      .title,
+      .subtitle {
+        color: findColorInvert($i);
+      }
     }
   }
 }
