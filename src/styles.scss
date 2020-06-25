@@ -10,6 +10,13 @@ $fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
 // https://dev.to/adrianbudzynski/dark-theme-for-your-angular-app-1664
 $radius: 1px;
 $blue: #4885ed;
+$orange: #ff9800;
+$yellow: #ffeb3b;
+$green: #4caf50;
+$turquoise: #009688;
+$cyan: #00bcd4;
+$purple: #9c27b0;
+$red: #f44336;
 
 @import "../node_modules/bulma/sass/utilities/_all.sass";
 @import "../node_modules/bulma/sass/base/_all.sass";
@@ -50,8 +57,6 @@ $card-background-color: $dark;
   border-radius: $radius;
 }
 
-
-
 @import "../node_modules/bulma/sass/components/card.sass";
 @import "../node_modules/bulma/sass/components/media.sass";
 @import "../node_modules/bulma/sass/components/level.sass";
@@ -87,4 +92,29 @@ hr {
   background-color: $dark;
   border-radius: 20px;
   border: 3px solid $black;
+}
+
+$cardsColours: (
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "turquoise": $turquoise,
+  "cyan": $cyan,
+  "blue": $blue,
+  "purple": $purple,
+  "red": $red,
+);
+
+@each $cardColour, $i in $cardsColours {
+  .card {
+    &.has-background-#{$cardColour} {
+      background-color: $i;
+      color: findColorInvert($i);
+    }
+  }
+}
+
+abbr {
+  border: none;
+  text-decoration: none;
 }

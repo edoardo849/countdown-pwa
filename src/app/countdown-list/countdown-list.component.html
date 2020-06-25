@@ -1,10 +1,8 @@
 <section class="section">
   <div class="container">
-    <h1 class="title">Countdowns</h1>
-
+    <h1 class="title">{{title$ | async}}</h1>
     <div class="countdown-list-container">
-      <app-countdown-item></app-countdown-item>
-      <app-countdown-item></app-countdown-item>
+      <app-countdown-item [event]="event" *ngFor="let event of events$ | async"></app-countdown-item>
     </div>
   </div>
 </section>

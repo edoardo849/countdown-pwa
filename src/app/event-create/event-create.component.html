@@ -48,11 +48,11 @@
         <hr>
         <div class="field is-grouped">
           <p class="control">
-            <button type="submit" [disabled]="!eventForm.form.valid" class="button is-link" (click)="createEvent()">
+            <button type="submit" [disabled]="!eventForm.form.valid" class="button is-link">
               Save
             </button>
           </p>
-          <button type="button" (click)="modal.closeModal($event)" class="button">
+          <button type="button" (click)="modal.closeModal()" class="button">
             Cancel
           </button>
         </div>

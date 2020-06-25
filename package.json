@@ -22,6 +22,7 @@
     "@fortawesome/fontawesome-free": "^5.13.1",
     "bulma": "^0.9.0",
     "idb": "^5.0.4",
+    "moment": "^2.27.0",
     "ngx-logger": "^4.1.9",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

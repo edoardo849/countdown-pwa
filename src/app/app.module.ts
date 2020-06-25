@@ -12,7 +12,10 @@ import { ModalComponent } from './modal/modal.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StorageService } from './storage.service';
 import { FormsModule } from '@angular/forms';
+import localeGb from '@angular/common/locales/en-GB';
+import { registerLocaleData } from '@angular/common';
 
+registerLocaleData(localeGb);
 
 export function appInit(storageService: StorageService) {
   return () => storageService.load();

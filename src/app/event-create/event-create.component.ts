@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StorageService } from '@app/storage.service';
-import { CountdownEvent } from '@app/event.model';
+import { CountdownEvent } from '@app/models/event.model';
 import { NGXLogger as Logger } from 'ngx-logger';
 import { NgForm } from '@angular/forms';
+
+import { COLOURS, Colour } from "@app/models/colour.model";
+import { ModalComponent } from '@app/modal/modal.component';
 
 @Component({
   selector: 'app-event-create',
@@ -11,16 +14,9 @@ import { NgForm } from '@angular/forms';
 })
 export class EventCreateComponent implements OnInit {
 
-  colours: any = [
-    { label: 'Pink', value: '#E91E63' },
-    { label: 'Purple', value: '#9C27B0' },
-    { label: 'Blue', value: '#2196F3' },
+  @ViewChild('modal') modal: ModalComponent;
 
-    { label: 'Green', value: '#4CAF50' },
-    { label: 'Yellow', value: '#FFC107' },
-
-  ];
-
+  colours: Colour[] = COLOURS;
   model: CountdownEvent = new CountdownEvent();
 
   constructor(
@@ -42,14 +38,11 @@ export class EventCreateComponent implements OnInit {
         colour: this.model.colour,
       });
       this._logger.debug("Success", result);
-      // TODO: close modal
+
+      await this.modal.closeModal();
+
     } catch (e) {
       this._logger.error("Could not create the event", e);
     }
-
-  }
-
-  async createEvent() {
-
   }
 }

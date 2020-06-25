@@ -9,7 +9,7 @@ import { NGXLogger as Logger } from 'ngx-logger';
 })
 export class ModalComponent implements OnInit, OnDestroy {
 
-  @Output() modalClose: EventEmitter<Event> = new EventEmitter<Event>();
+  @Output() modalClose: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 
   innerIsActive: boolean = false;
@@ -24,7 +24,7 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   }
 
-  async closeModal($event: Event) {
+  async closeModal() {
     this._logger.debug('Closing modal');
 
     await this._router.navigate([{
@@ -34,7 +34,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     });
 
     this.innerIsActive = true;
-    this.modalClose.next($event);
+    this.modalClose.next(true);
 
     this._logger.debug('Closed');
   }
