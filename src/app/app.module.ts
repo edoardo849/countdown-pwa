@@ -14,6 +14,7 @@ import { StorageService } from './storage.service';
 import { FormsModule } from '@angular/forms';
 import localeGb from '@angular/common/locales/en-GB';
 import { registerLocaleData } from '@angular/common';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 registerLocaleData(localeGb);
 
@@ -39,6 +40,7 @@ export function appInit(storageService: StorageService) {
       level: environment.loggerLevel,
       enableSourceMaps: true,
     }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
 
