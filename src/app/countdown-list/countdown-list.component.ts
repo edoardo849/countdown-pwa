@@ -54,7 +54,6 @@ export class CountdownListComponent implements OnInit, AfterContentInit, OnDestr
           this.showHero = false;
           this._changeDetector.detectChanges();
         }
-
       })
     );
   }
