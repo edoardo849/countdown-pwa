@@ -69,6 +69,7 @@ $card-background-color: $dark;
 $section-padding: 0.5rem;
 @import "../node_modules/bulma/sass/layout/section.sass";
 @import "../node_modules/bulma/sass/layout/footer.sass";
+@import "../node_modules/bulma/sass/layout/hero.sass";
 
 hr {
   height: 1px;
@@ -124,4 +125,12 @@ $cardsColours: (
 abbr {
   border: none;
   text-decoration: none;
+}
+
+.is-invisible {
+  visibility: hidden;
+  margin: 0;
+  width: 0;
+  height: 0;
+  padding: 0 !important;
 }

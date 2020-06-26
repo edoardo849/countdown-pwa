@@ -78,23 +78,13 @@ export class StorageService {
   }
 
   async getAllExpiredEvents() {
-
-    if (this._timerStarted === true) {
-      this._logger.debug("Stopping the timer");
-      this._refreshTimer.unsubscribe();
-      this._timerStarted = false;
-    }
-
     await this._triggerExpiredEventsChanged();
-
-
-
     return this.expiredEvents$;
   }
 
   private async _triggerExpiredEventsChanged() {
     const events = await this._db.getAllFromIndex('events', 'difference', IDBKeyRange.upperBound(0, true));
-
+    this._logger.debug("Retrieved expired events", events);
     this._expiredEventsDataChange.next(events);
   }
 
@@ -126,6 +116,7 @@ export class StorageService {
       this._logger.debug("Saved", result);
 
       await this._triggerEventsChanged();
+      await this._triggerExpiredEventsChanged();
 
     } catch (e) {
       this._logger.error("Could not create the event", event, e);
@@ -170,8 +161,9 @@ export class StorageService {
         cursor.continue();
       }
 
-      this._logger.debug('Retrieved', events);
+      this._logger.debug('Retrieved active events', events);
       this._eventsDataChange.next(events);
+
 
     } catch (e) {
       this._logger.error("Failed to get events from DB index", e);

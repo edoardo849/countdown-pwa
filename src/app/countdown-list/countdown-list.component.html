@@ -1,14 +1,27 @@
-<section class="section">
-  <div class="container" *ngIf="filterActiveEvents === true">
+<section class="section" [ngClass]="{'is-invisible': showHero }">
+  <div class="container" [ngClass]="{'is-invisible': filterActiveEvents === false }">
     <h1 class="title">Active Events</h1>
     <div class="countdown-list-container">
       <app-countdown-item [event]="event" *ngFor="let event of events$ | async"></app-countdown-item>
     </div>
   </div>
-  <div class="container" *ngIf="filterActiveEvents === false">
+  <div class="container" [ngClass]="{'is-invisible': filterActiveEvents === true }">
     <h1 class="title">Expired Events</h1>
     <div class="countdown-list-container">
       <app-countdown-item [event]="event" *ngFor="let event of expiredEvents$ | async"></app-countdown-item>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-primary is-bold is-fullheight-with-navbar" *ngIf="showHero === true">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        Hey there 👋
+      </h1>
+      <h2 class="subtitle">
+        Add a new event to start a countdown
+      </h2>
     </div>
   </div>
 </section>
