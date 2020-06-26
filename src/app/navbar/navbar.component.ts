@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PwaService } from '@app/pwa.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ export class NavbarComponent implements OnInit {
   public toggleExpiredBtn: boolean = true;
 
   constructor(
+    public pwaService: PwaService,
     private _router: Router
   ) { }
 
@@ -26,5 +28,4 @@ export class NavbarComponent implements OnInit {
       queryParamsHandling: 'preserve',
     });
   }
-
 }

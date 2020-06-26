@@ -43,7 +43,7 @@ export function appInit(storageService: StorageService) {
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
-
+    { provide: Window, useValue: window },
     {
       provide: APP_INITIALIZER,
       useFactory: appInit,

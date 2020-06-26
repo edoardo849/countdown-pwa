@@ -18,21 +18,16 @@ $turquoise: #009688;
 $cyan: #00bcd4;
 $purple: #9c27b0;
 $red: #f44336;
+$black-ter: hsl(0, 0%, 14%);
+$dark: $black-ter;
+$grey-darker: hsl(0, 0%, 21%);
 
-@import "../node_modules/bulma/sass/utilities/_all.sass";
-@import "../node_modules/bulma/sass/base/_all.sass";
-
+$link: $blue;
 $primary: $blue;
+
 $scheme-main: $black-ter;
 $background: $dark;
 $body-background-color: $dark;
-
-$text: $text-invert;
-$text-strong: $text-invert;
-$text-light: $text-invert;
-$link-hover: $link;
-$link-focus: $link;
-$link-active: $link;
 
 body,
 html {
@@ -40,10 +35,18 @@ html {
 }
 
 $button-text-decoration: none;
+@import "../node_modules/bulma/sass/utilities/_all.sass";
+
+$text: $text-invert;
+$text-strong: $text-invert;
+$text-light: $text-invert;
+$link-hover: $link;
+$link-focus: $link;
+$link-active: $link;
+@import "../node_modules/bulma/sass/base/_all.sass";
 
 @import "../node_modules/bulma/sass/elements/_all.sass";
 
-@import "../node_modules/bulma/sass/grid/_all.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
 
 // Navbar
@@ -76,7 +79,7 @@ hr {
    that is currently Firefox-only */
 * {
   scrollbar-width: thin;
-  scrollbar-color: dark;
+  scrollbar-color: $dark;
 }
 
 /* Works on Chrome/Edge/Safari */
