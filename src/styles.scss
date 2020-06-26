@@ -1,0 +1,127 @@
+@charset "utf-8";
+
+$fa-font-path: "./assets/fonts/fontawesome";
+
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
+
+// Import only what you need from Bulma
+// https://dev.to/adrianbudzynski/dark-theme-for-your-angular-app-1664
+$radius: 1px;
+
+$blue: #4885ed;
+$orange: #ff9800;
+$yellow: #ffeb3b;
+$green: #4caf50;
+$turquoise: #009688;
+$cyan: #00bcd4;
+$purple: #9c27b0;
+$red: #f44336;
+$black-ter: #242424;
+$dark: $black-ter;
+$grey-darker: hsl(0, 0%, 21%);
+
+$link: $blue;
+$primary: $blue;
+
+$scheme-main: $black-ter;
+$background: $dark;
+$body-background-color: $dark;
+
+body,
+html {
+  background-color: $black-ter;
+}
+
+$button-text-decoration: none;
+@import "../node_modules/bulma/sass/utilities/_all.sass";
+
+$text: $text-invert;
+$text-strong: $text-invert;
+$text-light: $text-invert;
+$link-hover: $link;
+$link-focus: $link;
+$link-active: $link;
+
+@import "../node_modules/bulma/sass/base/_all.sass";
+@import "../node_modules/bulma/sass/elements/_all.sass";
+@import "../node_modules/bulma/sass/form/_all.sass";
+
+// Navbar
+@import "../node_modules/bulma/sass/components/navbar.sass";
+
+// Cards
+$card-background-color: $dark;
+
+.card {
+  margin-bottom: 1rem;
+  border-radius: $radius;
+}
+
+@import "../node_modules/bulma/sass/components/card.sass";
+@import "../node_modules/bulma/sass/components/media.sass";
+@import "../node_modules/bulma/sass/components/level.sass";
+@import "../node_modules/bulma/sass/components/dropdown.sass";
+@import "../node_modules/bulma/sass/components/modal.sass";
+
+// Section
+$section-padding: 0.5rem;
+@import "../node_modules/bulma/sass/layout/section.sass";
+@import "../node_modules/bulma/sass/layout/footer.sass";
+
+hr {
+  height: 1px;
+}
+
+/* The emerging W3C standard
+   that is currently Firefox-only */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $dark;
+}
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: $dark;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $dark;
+  border-radius: 20px;
+  border: 3px solid $black;
+}
+
+$cardsColours: (
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "turquoise": $turquoise,
+  "cyan": $cyan,
+  "blue": $blue,
+  "purple": $purple,
+  "red": $red,
+);
+
+@each $cardColour, $i in $cardsColours {
+  .card {
+    &.has-background-#{$cardColour} {
+      background-color: $i;
+      color: findColorInvert($i);
+
+      .title,
+      .subtitle {
+        color: findColorInvert($i);
+      }
+    }
+  }
+}
+
+abbr {
+  border: none;
+  text-decoration: none;
+}

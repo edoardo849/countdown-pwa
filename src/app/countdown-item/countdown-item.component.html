@@ -1,0 +1,42 @@
+<div class="card" [ngClass]="event.colour">
+  <div class="card-content">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <span class="title" *ngIf="event.countdown?.years > 0">
+              {{event.countdown.years}}<small><abbr title="Years">yrs</abbr></small>
+            </span>
+            <span class="title" *ngIf="event.countdown?.months > 0 && event.countdown.months < 12">
+              {{event.countdown.months}}<small><abbr title="Months">mts</abbr></small>
+            </span>
+            <span class="title" *ngIf="event.countdown?.weeks > 0 && event.countdown.weeks < 4">
+              {{event.countdown.weeks}}<small><abbr title="Weeks">wks</abbr></small>
+            </span>
+            <span class="title" *ngIf="event.countdown?.days > 0 && event.countdown.days < 7">
+              {{event.countdown.days}}<small><abbr title="Days">d</abbr></small>
+            </span>
+            <span class="title"
+              *ngIf="event.countdown?.hours > 0 && event.countdown.hours < 24 && event.countdown.months <= 0">
+              {{event.countdown.hours}}<small><abbr title="Hours">hrs</abbr></small>
+            </span>
+            <span class="title"
+              *ngIf="event.countdown?.minutes > 0 && event.countdown.minutes < 60 && event.countdown.months <= 0 ">
+              {{event.countdown.minutes}}<small><abbr title="Minutes">min</abbr></small>
+            </span>
+          </p>
+          <p>
+            <span class="subtitle">{{event.description}}</span> <br>
+            <small class="is-size-7">
+              <time [dateTime]="event.date">due on {{ event.date | date:'short':'':'en-GB' }}</time>
+            </small>
+          </p>
+        </div>
+
+      </div>
+      <div class="media-right">
+        <button class="delete" (click)="delete(event.key)"></button>
+      </div>
+    </article>
+  </div>
+</div>

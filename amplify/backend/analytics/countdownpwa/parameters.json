@@ -1,0 +1,21 @@
+{
+    "appName": "countdownpwa",
+    "roleName": "pinpointLambdaRole192c919b",
+    "cloudformationPolicyName": "cloudformationPolicy192c919b",
+    "cloudWatchPolicyName": "cloudWatchPolicy192c919b",
+    "pinpointPolicyName": "pinpointPolicy192c919b",
+    "authPolicyName": "pinpoint_amplify_192c919b",
+    "unauthPolicyName": "pinpoint_amplify_192c919b",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

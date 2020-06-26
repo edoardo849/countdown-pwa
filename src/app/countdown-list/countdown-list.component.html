@@ -1,0 +1,14 @@
+<section class="section">
+  <div class="container" *ngIf="filterActiveEvents === true">
+    <h1 class="title">Active Events</h1>
+    <div class="countdown-list-container">
+      <app-countdown-item [event]="event" *ngFor="let event of events$ | async"></app-countdown-item>
+    </div>
+  </div>
+  <div class="container" *ngIf="filterActiveEvents === false">
+    <h1 class="title">Expired Events</h1>
+    <div class="countdown-list-container">
+      <app-countdown-item [event]="event" *ngFor="let event of expiredEvents$ | async"></app-countdown-item>
+    </div>
+  </div>
+</section>

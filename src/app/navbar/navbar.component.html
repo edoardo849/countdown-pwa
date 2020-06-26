@@ -1,0 +1,40 @@
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="level is-mobile">
+      <div class="level-left">
+        <div class="level-item">
+          <button class="button is-text" (click)="newEvent()">
+            <span class="icon">
+              <i class="fas fa-plus"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="level-right">
+
+        <div class="level-item">
+          <a (click)="toggleExpiredBtn = !toggleExpiredBtn" *ngIf="toggleExpiredBtn === true" class="button is-text"
+            [routerLink]="['/countdown-list']" [queryParams]="{events: 'expired'}">
+            <span class="icon">
+              <i class="fas fa-archive"></i>
+            </span>
+          </a>
+          <a (click)="toggleExpiredBtn = !toggleExpiredBtn" *ngIf="toggleExpiredBtn === false" class="button is-text"
+            [routerLink]="['/countdown-list']" [queryParams]="{events: 'active'}">
+            <span class="icon">
+              <i class="fas fa-calendar"></i>
+            </span>
+          </a>
+        </div>
+        <div class="level-item">
+          <button class="button is-primary" *ngIf="pwaService.promptEvent" (click)="pwaService.install()">
+            <span class="icon">
+              <i class="fas fa-arrow-circle-down"></i>
+            </span>
+            <span>Install</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
