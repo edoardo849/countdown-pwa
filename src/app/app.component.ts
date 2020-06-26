@@ -49,7 +49,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       // Resize Window
       window.resizeTo(
         400,
-        window.screen.availHeight / 2
+        window.screen.availHeight
       );
     }
     // Log launch display mode to analytics
