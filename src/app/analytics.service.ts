@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Analytics } from '@aws-amplify/analytics';
+import { Analytics } from 'aws-amplify';
 import { environment } from '@src/environments/environment';
 import { NGXLogger as Logger } from 'ngx-logger';
 
