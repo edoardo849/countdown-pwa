@@ -10,18 +10,22 @@ import { CountdownItemComponent } from './countdown-item/countdown-item.componen
 import { EventCreateComponent } from './event-create/event-create.component';
 import { ModalComponent } from './modal/modal.component';
 import { HttpClientModule } from '@angular/common/http';
-import { StorageService } from './storage.service';
+import { StorageService } from '@app/services/storage.service';
 import { FormsModule } from '@angular/forms';
 import localeGb from '@angular/common/locales/en-GB';
 import { registerLocaleData } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ServiceLoader } from "@app/models/service.model";
 
 registerLocaleData(localeGb);
 
-export function appInit(storageService: StorageService) {
-  return () => storageService.load();
+export function serviceInit(service: ServiceLoader) {
+  return () => service.load();
 }
+
+
+
 
 @NgModule({
   declarations: [
@@ -48,7 +52,7 @@ export function appInit(storageService: StorageService) {
     { provide: Window, useValue: window },
     {
       provide: APP_INITIALIZER,
-      useFactory: appInit,
+      useFactory: serviceInit,
       multi: true,
       deps: [StorageService]
     }

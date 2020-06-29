@@ -4,6 +4,7 @@ import { openDB, IDBPDatabase, DBSchema } from 'idb/with-async-ittr';
 import { NGXLogger as Logger } from 'ngx-logger';
 import { Event } from '@app/models/event.model';
 import * as moment from 'moment';
+import { ServiceLoader } from '@app/models/service.model';
 interface DB extends DBSchema {
   events: {
     value: Event;
@@ -15,7 +16,7 @@ interface DB extends DBSchema {
 @Injectable({
   providedIn: 'root'
 })
-export class StorageService {
+export class StorageService implements ServiceLoader {
 
   public events$: Observable<Event[]>;
   public expiredEvents$: Observable<Event[]>;

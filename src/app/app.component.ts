@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { PwaService } from './pwa.service';
+import { PwaService } from '@app/services/pwa.service';
 import { NGXLogger as Logger } from 'ngx-logger';
 import { EventManager } from '@angular/platform-browser';
-import { AnalyticsService } from './analytics.service';
+import { AnalyticsService } from '@app/services/analytics.service';
 
 @Component({
   selector: 'app-root',

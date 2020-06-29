@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Event } from '@app/models/event.model';
 import { NGXLogger as Logger } from 'ngx-logger';
-import { StorageService } from '@app/storage.service';
-import { AnalyticsService } from '@app/analytics.service';
+import { StorageService } from '@app/services/storage.service';
+import { AnalyticsService } from '@app/services/analytics.service';
 
 @Component({
   selector: 'app-countdown-item',

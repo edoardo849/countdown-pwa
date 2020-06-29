@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-$fa-font-path: "./assets/fonts/fontawesome";
+$fa-font-path: "/assets/fonts/fontawesome";
 
 @import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
@@ -20,7 +20,7 @@ $purple: #9c27b0;
 $red: #f44336;
 $black-ter: #242424;
 $dark: $black-ter;
-$grey-darker: hsl(0, 0%, 21%);
+$grey-darker: #363636;
 
 $link: $blue;
 $primary: $blue;
@@ -48,7 +48,6 @@ $link-active: $link;
 
 @import "../node_modules/bulma/sass/base/_all.sass";
 @import "../node_modules/bulma/sass/helpers/_all.sass";
-
 
 @import "../node_modules/bulma/sass/elements/_all.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
@@ -100,7 +99,8 @@ hr {
   border: none;
 }
 
-$cardsColours: ("orange": $orange,
+$cardsColours: (
+  "orange": $orange,
   "yellow": $yellow,
   "green": $green,
   "turquoise": $turquoise,
@@ -110,8 +110,7 @@ $cardsColours: ("orange": $orange,
   "red": $red,
 );
 
-@each $cardColour,
-$i in $cardsColours {
+@each $cardColour, $i in $cardsColours {
   .card {
     &.has-background-#{$cardColour} {
       background-color: $i;
@@ -138,5 +137,12 @@ abbr {
   padding: 0 !important;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

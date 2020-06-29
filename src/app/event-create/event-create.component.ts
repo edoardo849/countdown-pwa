@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { StorageService } from '@app/storage.service';
+import { StorageService } from '@app/services/storage.service';
 import { CountdownEvent } from '@app/models/event.model';
 import { NGXLogger as Logger } from 'ngx-logger';
-import { NgForm } from '@angular/forms';
 
 import { COLOURS, Colour } from "@app/models/colour.model";
 import { ModalComponent } from '@app/modal/modal.component';
-import { AnalyticsService } from '@app/analytics.service';
+import { AnalyticsService } from '@app/services/analytics.service';
 
 @Component({
   selector: 'app-event-create',
