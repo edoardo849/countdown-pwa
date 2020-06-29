@@ -1,4 +1,4 @@
-<section class="section" [ngClass]="{'is-invisible': showHero }">
+<section class="section" [ngClass]="{'is-invisible': showHero$ | async }">
   <div class="container">
     <h1 class="title" [ngClass]="{'is-invisible': filter !== 'expired' }">Expired events</h1>
     <h1 class="title" [ngClass]="{'is-invisible': filter === 'expired' }">Active events</h1>
@@ -9,7 +9,8 @@
   </div>
 </section>
 
-<section class="hero is-info is-bold is-fullheight-with-navbar" *ngIf="showHero === true">
+
+<section class="hero is-info is-bold is-fullheight-with-navbar" *ngIf=" (showHero$ | async) === true">
   <div class="hero-body">
     <div class="container has-text-centered">
       <h1 class="title">

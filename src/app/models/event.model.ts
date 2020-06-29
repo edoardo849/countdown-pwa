@@ -31,7 +31,9 @@ export class CountdownEvent implements Event {
 
   get date(): Date {
     if (this.utcDate) {
-      return new Date(`${this.utcDate}Z`);
+      const date = new Date(`${this.utcDate}`).toUTCString();
+      console.log('date', date);
+      return new Date(date);
     }
     return null;
   }

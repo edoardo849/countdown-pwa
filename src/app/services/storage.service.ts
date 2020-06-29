@@ -1,18 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, timer, Subscription } from 'rxjs';
-import { openDB, IDBPDatabase, DBSchema } from 'idb/with-async-ittr';
+import { Observable, BehaviorSubject, Subscription, timer } from 'rxjs';
+import { openDB, IDBPDatabase } from 'idb/with-async-ittr';
 import { NGXLogger as Logger } from 'ngx-logger';
 import { Event, Status } from '@app/models/event.model';
+import { DB } from '@app/models/db.model';
 import * as moment from 'moment';
 import { ServiceLoader } from '@app/models/service.model';
-interface DB extends DBSchema {
-  events: {
-    value: Event;
-    key: number;
-    indexes: { 'difference': number };
-  };
-}
-
 // https://mdbootstrap.com/education/pwa/angular/lesson-6-creating-indexeddb-database/
 @Injectable({
   providedIn: 'root'
@@ -29,6 +22,7 @@ export class StorageService implements ServiceLoader {
   private _db: IDBPDatabase<DB>;
 
   private _timerStarted: boolean = false;
+  private _worker: Worker = null;
 
   private _refreshTimer: Subscription;
 
@@ -60,27 +54,44 @@ export class StorageService implements ServiceLoader {
     this._expiredEventsDataChange = new BehaviorSubject<Event[]>(null);
     this.expiredEvents$ = this._expiredEventsDataChange.asObservable();
 
+    if (typeof Worker !== 'undefined') {
+      // Create a new
+      this._worker = new Worker('./storage.worker', { type: 'module' });
+
+      this._worker.onmessage = async ({ data }) => {
+        this._logger.log(`SW: `, data);
+
+        if (data === 'triggerEventsChanged') {
+          this._logger.log("Triggering events changed");
+          await this._triggerExpiredEventsChanged();
+          await this._triggerEventsChanged();
+        }
+      };
+
+    } else {
+      this._logger.warn("SW not supported");
+    }
+
     if (this._timerStarted === false) {
-      // perform the first load of active and expired events
-      this._logger.debug("Starting the timer");
+
       // start the refresh timer at every minute
-      this._refreshTimer = timer(0, 60000).subscribe(async () => {
-        this._logger.debug("Refreshing the events");
+      this._refreshTimer = timer(1000, 60000).subscribe(async () => {
+        console.log("Refreshing active events");
         await this._triggerEventsChanged();
       });
       this._timerStarted = true;
-      await this._triggerExpiredEventsChanged();
     }
+    // perform first load
+    await this._triggerExpiredEventsChanged();
+    await this._triggerEventsChanged();
 
     this._logger.debug('Done');
   }
 
   getAllEvents(filter?: Status) {
-
     if (filter && filter === Status.EXPIRED) {
       return this.expiredEvents$;
     }
-
     return this.events$;
   }
 
@@ -103,7 +114,6 @@ export class StorageService implements ServiceLoader {
 
       await this._triggerEventsChanged();
       await this._triggerExpiredEventsChanged();
-
 
     } catch (e) {
       this._logger.error("Could not delete the event", eventId, e);
@@ -134,7 +144,7 @@ export class StorageService implements ServiceLoader {
       this._logger.debug('Getting all events from the index');
 
       const events: Event[] = [];
-      const index = this._db.transaction("events", "readwrite").store.index("difference");
+      const index = this._db.transaction("events", "readonly").store.index("difference");
 
       for await (const cursor of index.iterate(IDBKeyRange.lowerBound(0, true), "next")) {
 
@@ -158,12 +168,6 @@ export class StorageService implements ServiceLoader {
 
           event.countdown = countdown;
           events.push(event);
-        } else {
-          // Update the event only when it occurs in the past
-          // let's not waste writes if there is no value in
-          // updating all the events
-          cursor.update(event);
-          await this._triggerExpiredEventsChanged();
         }
         cursor.continue();
       }

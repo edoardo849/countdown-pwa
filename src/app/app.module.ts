@@ -17,15 +17,13 @@ import { registerLocaleData } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ServiceLoader } from "@app/models/service.model";
+import { NotificationService } from './services/notification.service';
 
 registerLocaleData(localeGb);
 
 export function serviceInit(service: ServiceLoader) {
   return () => service.load();
 }
-
-
-
 
 @NgModule({
   declarations: [
@@ -55,6 +53,12 @@ export function serviceInit(service: ServiceLoader) {
       useFactory: serviceInit,
       multi: true,
       deps: [StorageService]
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: serviceInit,
+      multi: true,
+      deps: [NotificationService]
     }
   ],
   bootstrap: [AppComponent]

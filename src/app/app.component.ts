@@ -3,6 +3,7 @@ import { PwaService } from '@app/services/pwa.service';
 import { NGXLogger as Logger } from 'ngx-logger';
 import { EventManager } from '@angular/platform-browser';
 import { AnalyticsService } from '@app/services/analytics.service';
+import { NotificationService } from '@app/services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private _logger: Logger,
     private _eventManager: EventManager,
     private _analyticsService: AnalyticsService,
+    private _notificationService: NotificationService
 
   ) { }
 
@@ -35,6 +37,11 @@ export class AppComponent implements OnInit, AfterViewInit {
       this._pwaService.promptEvent = $event;
     });
 
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    } else if (Notification.permission !== "denied" && Notification.permission !== "granted") {
+      this._notificationService.canRequestPermission = true;
+    }
   }
 
   ngAfterViewInit() {

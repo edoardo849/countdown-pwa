@@ -25,13 +25,21 @@
             </span>
           </a>
         </div>
-        <div class="level-item">
-          <button class="button is-primary" *ngIf="pwaService.promptEvent" (click)="pwaService.install()">
+        <div class="level-item" *ngIf="pwaService.promptEvent">
+          <button class="button is-primary" (click)="pwaService.install()">
             <span class="icon">
               <i class="fas fa-arrow-circle-down"></i>
             </span>
             <span>Install</span>
           </button>
+        </div>
+        <div class="level-item" *ngIf="notificationService.canRequestPermission">
+          <button class="button is-text" (click)="notificationService.requestPermission()">
+            <span class="icon">
+              <i class="fas fa-bell"></i>
+            </span>
+          </button>
+
         </div>
       </div>
     </div>

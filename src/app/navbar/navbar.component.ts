@@ -5,6 +5,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { NGXLogger as Logger } from 'ngx-logger';
 import { DOCUMENT } from '@angular/common';
+import { NotificationService } from '@app/services/notification.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,8 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
     private _router: Router,
     private _breakpointObserver: BreakpointObserver,
     private _logger: Logger,
-    @Inject(DOCUMENT) private _document: Document,
+    //@Inject(DOCUMENT) private _document: Document,
+    public notificationService: NotificationService,
   ) { }
 
   ngOnInit(): void { }
