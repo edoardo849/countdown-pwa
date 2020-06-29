@@ -30,7 +30,7 @@ const start = async () => {
     // perform the first load of active and expired events
     console.log("Starting the timer");
     // start the refresh timer at every minute
-    timer(3000, 3000).subscribe(async () => {
+    timer(0, 60000).subscribe(async () => {
       refreshEvents();
     });
     _timerStarted = true;
