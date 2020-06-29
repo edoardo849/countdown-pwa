@@ -47,6 +47,9 @@ $link-focus: $link;
 $link-active: $link;
 
 @import "../node_modules/bulma/sass/base/_all.sass";
+@import "../node_modules/bulma/sass/helpers/_all.sass";
+
+
 @import "../node_modules/bulma/sass/elements/_all.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
 
@@ -64,7 +67,6 @@ $card-background-color: $dark;
 @import "../node_modules/bulma/sass/components/card.sass";
 @import "../node_modules/bulma/sass/components/media.sass";
 @import "../node_modules/bulma/sass/components/level.sass";
-@import "../node_modules/bulma/sass/components/dropdown.sass";
 @import "../node_modules/bulma/sass/components/modal.sass";
 
 // Section
@@ -95,12 +97,10 @@ hr {
 
 *::-webkit-scrollbar-thumb {
   background-color: $dark;
-  border-radius: 20px;
-  border: 3px solid $black;
+  border: none;
 }
 
-$cardsColours: (
-  "orange": $orange,
+$cardsColours: ("orange": $orange,
   "yellow": $yellow,
   "green": $green,
   "turquoise": $turquoise,
@@ -110,7 +110,8 @@ $cardsColours: (
   "red": $red,
 );
 
-@each $cardColour, $i in $cardsColours {
+@each $cardColour,
+$i in $cardsColours {
   .card {
     &.has-background-#{$cardColour} {
       background-color: $i;
@@ -136,3 +137,6 @@ abbr {
   height: 0;
   padding: 0 !important;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

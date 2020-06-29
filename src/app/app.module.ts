@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import localeGb from '@angular/common/locales/en-GB';
 import { registerLocaleData } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { LayoutModule } from '@angular/cdk/layout';
 
 registerLocaleData(localeGb);
 
@@ -41,6 +42,7 @@ export function appInit(storageService: StorageService) {
       enableSourceMaps: true,
     }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    LayoutModule,
   ],
   providers: [
     { provide: Window, useValue: window },
