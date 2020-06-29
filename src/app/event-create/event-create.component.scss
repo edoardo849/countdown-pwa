@@ -1,0 +1,62 @@
+@import "./../../_variables";
+@import "./../../../node_modules/bulma/sass/utilities/_all.sass";
+
+$label-radius: 8;
+
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.colour-picker {
+  margin-right: 0.2rem;
+}
+
+.colour-picker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: #{$label-radius * 2}px;
+  width: #{$label-radius * 2}px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+@each $cardColour, $i in $cardsColours {
+  .colour-picker {
+    &.has-background-#{$cardColour} {
+      background-color: $i;
+      color: findColorInvert($i);
+    }
+  }
+  input[type="radio"]:checked + .colour-picker {
+    &.has-background-#{$cardColour}:after {
+      background: findColorInvert($i);
+    }
+  }
+}
+
+.colour-picker:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+input[type="radio"]:checked + .colour-picker:after {
+  display: block;
+}
+
+input[type="radio"]:checked + .colour-picker:after {
+  top: #{$label-radius / 2}px;
+  left: #{$label-radius / 2}px;
+  width: #{$label-radius}px;
+  height: #{$label-radius}px;
+  border-radius: 50%;
+}
+
+.colour-picker-label {
+  margin-left: #{$label-radius * 2 + 2}px;
+}

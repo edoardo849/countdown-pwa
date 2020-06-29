@@ -37,9 +37,9 @@
               <div class="control">
 
                 <label class="radio" *ngFor="let colour of colours">
-
                   <input type="radio" [value]="colour.value" name="colour" ngModel required>
-                  {{colour.label}}
+                  <i class="colour-picker" [ngClass]="colour.value"></i>
+                  <span class="colour-picker-label">{{colour.label}}</span>
                 </label>
               </div>
             </div>

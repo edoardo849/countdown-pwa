@@ -6,21 +6,11 @@ $fa-font-path: "/assets/fonts/fontawesome";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
 
+@import "./_variables";
+
 // Import only what you need from Bulma
 // https://dev.to/adrianbudzynski/dark-theme-for-your-angular-app-1664
 $radius: 1px;
-
-$blue: #4885ed;
-$orange: #ff9800;
-$yellow: #ffeb3b;
-$green: #4caf50;
-$turquoise: #009688;
-$cyan: #00bcd4;
-$purple: #9c27b0;
-$red: #f44336;
-$black-ter: #242424;
-$dark: $black-ter;
-$grey-darker: #363636;
 
 $link: $blue;
 $primary: $blue;
@@ -99,17 +89,6 @@ hr {
   border: none;
 }
 
-$cardsColours: (
-  "orange": $orange,
-  "yellow": $yellow,
-  "green": $green,
-  "turquoise": $turquoise,
-  "cyan": $cyan,
-  "blue": $blue,
-  "purple": $purple,
-  "red": $red,
-);
-
 @each $cardColour, $i in $cardsColours {
   .card {
     &.has-background-#{$cardColour} {
@@ -120,6 +99,11 @@ $cardsColours: (
       .subtitle {
         color: findColorInvert($i);
       }
+    }
+  }
+  .fas {
+    &.has-background-#{$cardColour} {
+      color: $i;
     }
   }
 }

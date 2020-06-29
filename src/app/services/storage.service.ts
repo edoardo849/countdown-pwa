@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, timer, Subscription } from 'rxjs';
 import { openDB, IDBPDatabase, DBSchema } from 'idb/with-async-ittr';
 import { NGXLogger as Logger } from 'ngx-logger';
-import { Event } from '@app/models/event.model';
+import { Event, Status } from '@app/models/event.model';
 import * as moment from 'moment';
 import { ServiceLoader } from '@app/models/service.model';
 interface DB extends DBSchema {
@@ -12,6 +12,7 @@ interface DB extends DBSchema {
     indexes: { 'difference': number };
   };
 }
+
 // https://mdbootstrap.com/education/pwa/angular/lesson-6-creating-indexeddb-database/
 @Injectable({
   providedIn: 'root'
@@ -59,27 +60,31 @@ export class StorageService implements ServiceLoader {
     this._expiredEventsDataChange = new BehaviorSubject<Event[]>(null);
     this.expiredEvents$ = this._expiredEventsDataChange.asObservable();
 
-    this._logger.debug('Done');
-  }
-
-  async getAllEvents() {
-
-    await this._triggerEventsChanged();
     if (this._timerStarted === false) {
+      // perform the first load of active and expired events
       this._logger.debug("Starting the timer");
       // start the refresh timer at every minute
-      this._refreshTimer = timer(60000, 60000).subscribe(async () => {
+      this._refreshTimer = timer(0, 60000).subscribe(async () => {
         this._logger.debug("Refreshing the events");
         await this._triggerEventsChanged();
       });
       this._timerStarted = true;
+      await this._triggerExpiredEventsChanged();
+    }
+
+    this._logger.debug('Done');
+  }
+
+  getAllEvents(filter?: Status) {
+
+    if (filter && filter === Status.EXPIRED) {
+      return this.expiredEvents$;
     }
 
     return this.events$;
   }
 
   async getAllExpiredEvents() {
-    await this._triggerExpiredEventsChanged();
     return this.expiredEvents$;
   }
 
@@ -158,13 +163,13 @@ export class StorageService implements ServiceLoader {
           // let's not waste writes if there is no value in
           // updating all the events
           cursor.update(event);
+          await this._triggerExpiredEventsChanged();
         }
         cursor.continue();
       }
 
       this._logger.debug('Retrieved active events', events);
       this._eventsDataChange.next(events);
-
 
     } catch (e) {
       this._logger.error("Failed to get events from DB index", e);

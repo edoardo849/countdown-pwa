@@ -9,7 +9,7 @@ export interface Event {
 
 export enum Status {
   EXPIRED = 'expired',
-  NOT_EXPIRED = 'not-expired'
+  ACTIVE = 'active'
 }
 
 export interface Countdown {
