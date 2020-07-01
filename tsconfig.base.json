@@ -22,7 +22,7 @@
       "@src/*": [
         "src/*"
       ]
-    },
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

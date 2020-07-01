@@ -4,7 +4,8 @@ import { openDB, IDBPDatabase } from 'idb/with-async-ittr';
 import { DB } from './../models/db.model';
 import * as moment from 'moment';
 
-const canLog = true;
+// TODO: use environment
+const canLog = false;
 const canNotify = () => {
   if (
     ("Notification" in self) &&

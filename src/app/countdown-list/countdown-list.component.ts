@@ -1,7 +1,7 @@
-import { Component, OnInit, AfterContentInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { StorageService } from '@app/services/storage.service';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
-import { tap, map, switchMap, filter } from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
 import { Event, Status } from '@app/models/event.model';
 import { NGXLogger as Logger } from 'ngx-logger';
 import { ActivatedRoute } from '@angular/router';

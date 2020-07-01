@@ -76,7 +76,7 @@ export class StorageService implements ServiceLoader {
 
       // start the refresh timer at every minute
       this._refreshTimer = timer(1000, 60000).subscribe(async () => {
-        console.log("Refreshing active events");
+        this._logger.debug("Refreshing active events: ");
         await this._triggerEventsChanged();
       });
       this._timerStarted = true;
